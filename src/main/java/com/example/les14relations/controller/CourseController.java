@@ -1,6 +1,7 @@
 package com.example.les14relations.controller;
 
-import com.example.les14relations.dto.CourseDto;
+import com.example.les14relations.dto.CourseInputDto;
+import com.example.les14relations.dto.CourseOutputDto;
 import com.example.les14relations.service.CourseService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -23,14 +24,14 @@ public class CourseController {
     }
 
     @PostMapping
-    public ResponseEntity<CourseDto> createCourse(@Valid @RequestBody CourseDto courseDto) {
+    public ResponseEntity<CourseOutputDto> createCourse(@Valid @RequestBody CourseInputDto courseInputDto) {
         // validation code is skipped
 
-        courseDto = service.createCourse(courseDto);
+        CourseOutputDto courseOutputDto = service.createCourse(courseInputDto);
         URI uri = URI.create(ServletUriComponentsBuilder
                 .fromCurrentRequest()
-                .path("/" + courseDto.id).toUriString());
+                .path("/" + courseOutputDto.id).toUriString());
 
-        return ResponseEntity.created(uri).body(courseDto);
+        return ResponseEntity.created(uri).body(courseOutputDto);
     }
 }

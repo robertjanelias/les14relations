@@ -1,6 +1,7 @@
 package com.example.les14relations.service;
 
-import com.example.les14relations.dto.CourseDto;
+import com.example.les14relations.dto.CourseInputDto;
+import com.example.les14relations.dto.CourseOutputDto;
 import com.example.les14relations.model.Course;
 import com.example.les14relations.repository.CourseRepository;
 import com.example.les14relations.repository.TeacherRepository;
@@ -16,14 +17,19 @@ public class CourseService {
         this.courseRepository = courseRepos;
         this.teacherRepository = teacherRepos;
     }
-    public CourseDto createCourse(CourseDto courseDto) {
+    public CourseOutputDto createCourse(CourseInputDto courseInputDto) {
         // create course entity object
         Course course = new Course();
-        course.setTitle(courseDto.title);
-        course.setSp(courseDto.sp);
+        course.setTitle(courseInputDto.title);
+        course.setSp(courseInputDto.sp);
 
         courseRepository.save(course);
-        courseDto.id = course.getId();
-        return courseDto;
+
+        CourseOutputDto courseOutputDto = new CourseOutputDto();
+        courseOutputDto.id = course.getId();
+        courseOutputDto.title = course.getTitle();
+        courseOutputDto.sp = course.getSp();
+
+        return courseOutputDto;
     }
 }
