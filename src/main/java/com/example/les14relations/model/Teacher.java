@@ -3,6 +3,9 @@ package com.example.les14relations.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "teachers")
@@ -18,6 +21,9 @@ public class Teacher {
     private LocalDate dob;
     @Column(nullable = false, unique = true)
     private String email;
+
+    @ManyToMany(mappedBy = "teachers")
+    private Set<Course> courses = new HashSet<>();
 
     public Long getId() {
         return id;

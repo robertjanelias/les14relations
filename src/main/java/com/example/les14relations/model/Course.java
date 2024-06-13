@@ -2,6 +2,10 @@ package com.example.les14relations.model;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 @Entity
 @Table(name = "courses")
 public class Course {
@@ -12,6 +16,9 @@ public class Course {
 
     private String title;
     private short sp;
+
+    @ManyToMany
+    private Set<Teacher> teachers = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -31,5 +38,9 @@ public class Course {
 
     public void setSp(short sp) {
         this.sp = sp;
+    }
+
+    public Set<Teacher> getTeachers() {
+        return teachers;
     }
 }
