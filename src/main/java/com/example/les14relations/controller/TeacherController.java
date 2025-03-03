@@ -4,8 +4,6 @@ import com.example.les14relations.dto.TeacherDto;
 import com.example.les14relations.service.TeacherService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -21,29 +19,10 @@ public class TeacherController {
         this.service = service;
     }
 
-//    @GetMapping
-//    public ResponseEntity<List<Teacher>> getAllTeachers() {
-//        return ResponseEntity.ok(repos.findAll());
-//    }
-//
-//    @GetMapping("/search")
-//    public ResponseEntity<List<Teacher>> getTeachersByLastName(@RequestParam String lname) {
-//        return ResponseEntity.ok(repos.findByLastNameContainingIgnoreCase(lname));
-//    }
-
     @PostMapping
-    public ResponseEntity<?> createTeacher(@Valid @RequestBody TeacherDto teacherDto, BindingResult br) {
+    public ResponseEntity<?> createTeacher(@Valid @RequestBody TeacherDto teacherDto) {
         try {
-            if (br.hasFieldErrors()) {
-                StringBuilder sb = new StringBuilder();
-                for (FieldError fe : br.getFieldErrors()) {
-                    sb.append(fe.getField());
-                    sb.append(" : ");
-                    sb.append(fe.getDefaultMessage());
-                    sb.append("\n");
-                }
-                return ResponseEntity.badRequest().body(sb.toString());
-            }
+
             teacherDto = service.createTeacher(teacherDto);
             URI uri = URI.create(ServletUriComponentsBuilder
                     .fromCurrentRequest()

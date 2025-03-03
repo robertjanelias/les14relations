@@ -28,7 +28,6 @@ public class CourseController {
 
     @PostMapping
     public ResponseEntity<CourseOutputDto> createCourse(@Valid @RequestBody CourseInputDto courseInputDto) {
-        // validation code is skipped
 
         CourseOutputDto courseOutputDto = service.createCourse(courseInputDto);
         URI uri = URI.create(ServletUriComponentsBuilder
@@ -38,7 +37,7 @@ public class CourseController {
         return ResponseEntity.created(uri).body(courseOutputDto);
     }
 
-    @PostMapping("/{courseId}/assign")
+    @PutMapping("/{courseId}/assign")
     public ResponseEntity<String> assignTeacher(@PathVariable Long courseId,
                                                 @RequestParam Long teacherId) {
         this.service.assignTeacher(courseId, teacherId);

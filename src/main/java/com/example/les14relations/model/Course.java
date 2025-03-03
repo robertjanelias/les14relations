@@ -3,7 +3,6 @@ package com.example.les14relations.model;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -18,6 +17,11 @@ public class Course {
     private short sp;
 
     @ManyToMany
+    @JoinTable(
+            name = "courses_teachers",
+            joinColumns = @JoinColumn(name = "course_id"),
+            inverseJoinColumns = @JoinColumn(name = "teacher_id")
+    )
     private Set<Teacher> teachers = new HashSet<>();
 
     public Long getId() {
