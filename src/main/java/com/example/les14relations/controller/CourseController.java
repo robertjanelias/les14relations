@@ -44,4 +44,11 @@ public class CourseController {
 
         return ResponseEntity.ok("Course " + courseId + " linked with teacher " + teacherId);
     }
+
+    @DeleteMapping("/{courseId}")
+    public ResponseEntity<?> deleteCourse(@PathVariable long courseId) {
+        this.service.deleteCourse(courseId);
+
+        return ResponseEntity.noContent().build();
+    }
 }

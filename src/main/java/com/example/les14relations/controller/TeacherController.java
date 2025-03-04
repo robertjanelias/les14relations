@@ -21,17 +21,13 @@ public class TeacherController {
 
     @PostMapping
     public ResponseEntity<?> createTeacher(@Valid @RequestBody TeacherDto teacherDto) {
-        try {
+        teacherDto = service.createTeacher(teacherDto);
 
-            teacherDto = service.createTeacher(teacherDto);
-            URI uri = URI.create(ServletUriComponentsBuilder
-                    .fromCurrentRequest()
-                    .path("/" + teacherDto.id).toUriString());
-            return ResponseEntity.created(uri).body(teacherDto);
-        }
-        catch (Exception ex) {
-            return ResponseEntity.unprocessableEntity().body("Creation failed");
-        }
+        URI uri = URI.create(ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/" + teacherDto.id).toUriString());
+
+        return ResponseEntity.created(uri).body(teacherDto);
     }
 
     @GetMapping("/{id}")

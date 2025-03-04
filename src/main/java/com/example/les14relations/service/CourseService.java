@@ -46,4 +46,8 @@ public class CourseService {
         course.getTeachers().add(teacher);
         this.courseRepository.save(course);
     }
+
+    public void deleteCourse(long courseId) {
+        this.courseRepository.deleteById(courseId);
+    }
 }

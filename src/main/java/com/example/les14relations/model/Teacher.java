@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -22,7 +21,7 @@ public class Teacher {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @ManyToMany(mappedBy = "teachers")
+    @ManyToMany(mappedBy = "teachers", fetch = FetchType.EAGER)
     private Set<Course> courses = new HashSet<>();
 
     public Long getId() {
