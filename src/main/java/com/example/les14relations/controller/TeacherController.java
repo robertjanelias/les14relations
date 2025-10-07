@@ -20,7 +20,7 @@ public class TeacherController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createTeacher(@Valid @RequestBody TeacherDto teacherDto) {
+    public ResponseEntity<TeacherDto> createTeacher(@Valid @RequestBody TeacherDto teacherDto) {
         teacherDto = service.createTeacher(teacherDto);
 
         URI uri = URI.create(ServletUriComponentsBuilder
